@@ -68,6 +68,7 @@ StateRow = namedtuple('StateRow', 'state_name tech_code year value')
 for state in sorted(REGION_CODES):
     print('Processing data for ' + state)
     path = BASE_URL_PREFIX + REGION_CODES[state].lower() + BASE_URL_SUFFIX
+    print('URL being scraped ' + path)
     r = requests.get(path)
     soup = BeautifulSoup(r.text, "html.parser")
 
@@ -80,6 +81,7 @@ for state in sorted(REGION_CODES):
             row = StateRow(state, tech_code, year, value.string.strip())
             MASTER_LIST.append(row)
             year = year + 1
+            #end with break for testing quickly
             break
         break
     break
